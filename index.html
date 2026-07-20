@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danny STORE - Mode & Accessoires</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --gold: #D4AF37; --gold-light: #f0e68c; --dark: #1a1a2e; --dark-light: #16213e; --rose: #E8B4B8; --light: #f8f9fa; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: var(--dark); line-height: 1.6; }
+        
+        /* Header */
+        .ds-header { background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%); color: white; padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .ds-header-top { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; gap: 1rem; }
+        .ds-logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; background: linear-gradient(45deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .ds-nav { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+        .ds-nav a { color: #ccc; text-decoration: none; font-weight: 500; transition: color 0.3s; cursor: pointer; font-size: 0.95rem; }
+        .ds-nav a:hover, .ds-nav a.active { color: var(--gold); }
+        .ds-cart-btn { background: var(--gold); color: var(--dark); border: none; padding: 0.6rem 1.2rem; border-radius: 25px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: transform 0.2s; font-family: inherit; font-size: 0.9rem; }
+        .ds-cart-btn:hover { transform: scale(1.05); }
+        
+        /* Hero */
+        .ds-hero { background: linear-gradient(135deg, var(--dark) 0%, #0f3460 50%, #533483 100%); color: white; padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+        .ds-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .ds-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; position: relative; z-index: 1; font-weight: 800; }
+        .ds-hero p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem; position: relative; z-index: 1; font-weight: 300; }
+        .ds-hero-cta { background: var(--gold); color: var(--dark); padding: 1rem 2.5rem; border-radius: 30px; font-weight: 700; font-size: 1.1rem; border: none; cursor: pointer; position: relative; z-index: 1; transition: all 0.3s; font-family: inherit; }
+        .ds-hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,175,55,0.4); }
+        
+        /* Categories */
+        .ds-categories { display: flex; justify-content: center; gap: 1rem; padding: 2rem; flex-wrap: wrap; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 70px; z-index: 90; }
+        .ds-cat-btn { padding: 0.8rem 2rem; border: 2px solid #e0e0e0; background: white; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-family: inherit; font-size: 0.9rem; }
+        .ds-cat-btn:hover, .ds-cat-btn.active { border-color: var(--gold); background: #fffdf5; color: var(--gold); }
+        
+        /* Products */
+        .ds-products { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; }
+        .ds-section-title { text-align: center; font-size: 2.2rem; color: var(--dark); margin-bottom: 3rem; position: relative; font-weight: 800; }
+        .ds-section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin: 1rem auto 0; border-radius: 2px; }
+        .ds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        .ds-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s; position: relative; }
+        .ds-card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+        .ds-card-img { width: 100%; height: 280px; object-fit: cover; background: linear-gradient(135deg, #f5f5f5, #e8e8e8); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .ds-card-badge { position: absolute; top: 1rem; left: 1rem; background: var(--gold); color: var(--dark); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+        .ds-card-body { padding: 1.5rem; }
+        .ds-card-cat { color: var(--gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .ds-card-title { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin: 0.5rem 0; }
+        .ds-card-price { font-size: 1.4rem; font-weight: 800; color: var(--dark); }
+        .ds-card-price .old { font-size: 0.9rem; color: #999; text-decoration: line-through; margin-left: 0.5rem; font-weight: 500; }
+        .ds-add-btn { width: 100%; margin-top: 1rem; padding: 0.9rem; background: var(--dark); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: inherit; font-size: 0.95rem; }
+        .ds-add-btn:hover { background: var(--gold); color: var(--dark); }
+        
+        /* Cart Sidebar */
+        .ds-cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: white; box-shadow: -5px 0 30px rgba(0,0,0,0.2); z-index: 200; transition: right 0.4s ease; display: flex; flex-direction: column; }
+        .ds-cart-sidebar.open { right: 0; }
+        .ds-cart-header { background: var(--dark); color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .ds-cart-header h3 { margin: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; }
+        .ds-close-cart { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; font-family: inherit; }
+        .ds-cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+        .ds-cart-item { display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee; align-items: center; }
+        .ds-cart-item-img { width: 60px; height: 60px; background: #f5f5f5; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .ds-cart-item-info { flex: 1; min-width: 0; }
+        .ds-cart-item-info h4 { margin: 0 0 0.3rem; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ds-cart-item-info p { margin: 0; color: var(--gold); font-weight: 700; font-size: 0.9rem; }
+        .ds-cart-item-qty { display: flex; align-items: center; gap: 0.5rem; }
+        .ds-cart-item-qty button { width: 28px; height: 28px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-weight: 700; font-family: inherit; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .ds-cart-item-qty span { font-weight: 700; min-width: 20px; text-align: center; font-size: 0.9rem; }
+        .ds-remove-item { color: #e74c3c; background: none; border: none; cursor: pointer; font-size: 1.2rem; font-family: inherit; padding: 0.2rem; }
+        .ds-cart-footer { padding: 1.5rem; border-top: 2px solid #eee; background: #fafafa; }
+        .ds-cart-total { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; }
+        .ds-checkout-btn { width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s; font-family: inherit; }
+        .ds-checkout-btn:hover { transform: scale(1.02); }
+        .ds-empty-cart { text-align: center; padding: 3rem 1rem; color: #999; }
+        .ds-empty-cart .icon { font-size: 3rem; margin-bottom: 1rem; }
+        
+        /* Overlay */
+        .ds-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .ds-overlay.active { opacity: 1; pointer-events: all; }
+        
+        /* Toast */
+        .ds-toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--dark); color: white; padding: 1rem 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 300; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); display: flex; align-items: center; gap: 0.5rem; font-weight: 600; }
+        .ds-toast.show { transform: translateX(-50%) translateY(0); }
+        .ds-toast .check { color: #2ecc71; font-size: 1.2rem; }
+        
+        /* Footer */
+        .ds-footer { background: var(--dark); color: white; padding: 3rem 2rem 2rem; margin-top: 4rem; }
+        .ds-footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .ds-footer h4 { color: var(--gold); margin-bottom: 1rem; font-size: 1.1rem; }
+        .ds-footer a { color: #aaa; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s; font-size: 0.95rem; }
+        .ds-footer a:hover { color: var(--gold); }
+        .ds-footer p { color: #aaa; line-height: 1.6; font-size: 0.95rem; }
+        .ds-footer-bottom { text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #333; color: #666; font-size: 0.9rem; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ds-hero h1 { font-size: 2rem; }
+            .ds-hero p { font-size: 1rem; }
+            .ds-cart-sidebar { width: 100%; right: -100%; }
+            .ds-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+            .ds-card-img { height: 200px; }
+            .ds-nav { gap: 1rem; }
+            .ds-logo { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="ds-header">
+        <div class="ds-header-top">
+            <div class="ds-logo">DANNY STORE</div>
+            <nav class="ds-nav">
+                <a href="#" class="active" onclick="showSection('all'); return false;">Accueil</a>
+                <a href="#snapbacks" onclick="showSection('snapback'); return false;">Snapbacks</a>
+                <a href="#bijoux" onclick="showSection('bijoux'); return false;">Bijoux</a>
+                <a href="#vetements" onclick="showSection('vetements'); return false;">Vêtements</a>
+                <button class="ds-cart-btn" onclick="toggleCart()">
+                    <span>🛒</span>
+                    <span>Panier</span>
+                    <span id="cart-count" style="background: white; color: var(--dark); border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem;">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="ds-hero">
+        <h1>Danny STORE</h1>
+        <p>Style, élégance et tendance. Découvrez notre collection exclusive de snapbacks, bijoux et vêtements pour femme.</p>
+        <button class="ds-hero-cta" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">Découvrir la collection</button>
+    </section>
+
+    <div class="ds-categories">
+        <button class="ds-cat-btn active" onclick="filterCategory('all', this)">Tout</button>
+        <button class="ds-cat-btn" onclick="filterCategory('snapback', this)">🧢 Snapbacks</button>
+        <button class="ds-cat-btn" onclick="filterCategory('bijoux', this)">💎 Bijoux</button>
+        <button class="ds-cat-btn" onclick="filterCategory('vetements', this)">👗 Vêtements</button>
+    </div>
+
+    <section class="ds-products" id="products-section">
+        <h2 class="ds-section-title">Nos Produits</h2>
+        <div class="ds-grid" id="products-grid"></div>
+    </section>
+
+    <footer class="ds-footer">
+        <div class="ds-footer-grid">
+            <div>
+                <h4>Danny STORE</h4>
+                <p>Votre destination mode préférée. Qualité, style et prix imbattables depuis 2024.</p>
+            </div>
+            <div>
+                <h4>Catégories</h4>
+                <a href="#">Snapbacks</a>
+                <a href="#">Bijoux</a>
+                <a href="#">Vêtements Femme</a>
+                <a href="#">Nouveautés</a>
+            </div>
+            <div>
+                <h4>Service Client</h4>
+                <a href="#">Livraison & Retours</a>
+                <a href="#">FAQ</a>
+                <a href="#">Contact</a>
+                <a href="#">Conditions générales</a>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>📧 contact@dannystore.com</p>
+                <p>📱 +509 0000-0000</p>
+                <p>📍 Haïti</p>
+            </div>
+        </div>
+        <div class="ds-footer-bottom">© 2024 Danny STORE. Tous droits réservés.</div>
+    </footer>
+
+    <div class="ds-overlay" id="overlay" onclick="toggleCart()"></div>
+    
+    <div class="ds-cart-sidebar" id="cart-sidebar">
+        <div class="ds-cart-header">
+            <h3>🛒 Votre Panier</h3>
+            <button class="ds-close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="ds-cart-items" id="cart-items">
+            <div class="ds-empty-cart">
+                <div class="icon">🛍️</div>
+                <p>Votre panier est vide</p>
+            </div>
+        </div>
+        <div class="ds-cart-footer">
+            <div class="ds-cart-total">
+                <span>Total</span>
+                <span id="cart-total">0 G</span>
+            </div>
+            <button class="ds-checkout-btn" onclick="checkout()">Commander maintenant</button>
+        </div>
+    </div>
+
+    <div class="ds-toast" id="toast">
+        <span class="check">✓</span>
+        <span id="toast-msg">Produit ajouté au panier !</span>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: "Snapback NY Classique", category: "snapback", price: 2500, oldPrice: 3500, badge: "POPULAIRE", icon: "🧢" },
+            { id: 2, name: "Snapback Los Angeles", category: "snapback", price: 2800, oldPrice: null, badge: "NEW", icon: "🧢" },
+            { id: 3, name: "Snapback Broderie Or", category: "snapback", price: 3500, oldPrice: 4500, badge: "LUXE", icon: "🧢" },
+            { id: 4, name: "Snapback Edition Limitée", category: "snapback", price: 4200, oldPrice: null, badge: "EXCLUSIF", icon: "🧢" },
+            { id: 5, name: "Collier Chaîne Or 18K", category: "bijoux", price: 8500, oldPrice: 12000, badge: "BEST", icon: "💎" },
+            { id: 6, name: "Bracelet Gourmette", category: "bijoux", price: 3200, oldPrice: null, badge: "", icon: "💎" },
+            { id: 7, name: "Boucles d'Oreilles Créoles", category: "bijoux", price: 1800, oldPrice: 2500, badge: "SALE", icon: "💎" },
+            { id: 8, name: "Bague Zirconium", category: "bijoux", price: 4500, oldPrice: null, badge: "NEW", icon: "💎" },
+            { id: 9, name: "Robe Élégante Soirée", category: "vetements", price: 6500, oldPrice: 9000, badge: "TENDANCE", icon: "👗" },
+            { id: 10, name: "Top Crop Fashion", category: "vetements", price: 2200, oldPrice: null, badge: "", icon: "👚" },
+            { id: 11, name: "Jupe Plissée", category: "vetements", price: 3500, oldPrice: 4800, badge: "SALE", icon: "👗" },
+            { id: 12, name: "Ensemble Sport Chic", category: "vetements", price: 5500, oldPrice: null, badge: "NEW", icon: "👚" },
+            { id: 13, name: "Veste Denim Oversize", category: "vetements", price: 4800, oldPrice: 6500, badge: "", icon: "🧥" },
+            { id: 14, name: "Pantalon Palazzo", category: "vetements", price: 3800, oldPrice: null, badge: "", icon: "👖" },
+            { id: 15, name: "Snapback Camo Edition", category: "snapback", price: 3000, oldPrice: null, badge: "", icon: "🧢" },
+            { id: 16, name: "Montre Bracelet Cuir", category: "bijoux", price: 5500, oldPrice: 7500, badge: "", icon: "⌚" }
+        ];
+
+        let cart = [];
+        let currentFilter = 'all';
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('products-grid');
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            grid.innerHTML = filtered.map(p => `
+                <div class="ds-card" data-category="${p.category}">
+                    ${p.badge ? `<span class="ds-card-badge">${p.badge}</span>` : ''}
+                    <div class="ds-card-img">${p.icon}</div>
+                    <div class="ds-card-body">
+                        <div class="ds-card-cat">${p.category}</div>
+                        <h3 class="ds-card-title">${p.name}</h3>
+                        <div class="ds-card-price">
+                            ${p.price.toLocaleString()} G
+                            ${p.oldPrice ? `<span class="old">${p.oldPrice.toLocaleString()} G</span>` : ''}
+                        </div>
+                        <button class="ds-add-btn" onclick="addToCart(${p.id})">
+                            <span>🛒</span> Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(cat, btn) {
+            currentFilter = cat;
+            document.querySelectorAll('.ds-cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts(cat);
+        }
+
+        function showSection(cat) {
+            const buttons = document.querySelectorAll('.ds-cat-btn');
+            const index = cat === 'all' ? 0 : cat === 'snapback' ? 1 : cat === 'bijoux' ? 2 : 3;
+            filterCategory(cat, buttons[index]);
+            document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.ds-nav a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCart();
+            showToast(`${product.name} ajouté !`);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) removeFromCart(id);
+                else updateCart();
+            }
+        }
+
+        function updateCart() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-count').textContent = count;
+            const itemsContainer = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `
+                    <div class="ds-empty-cart">
+                        <div class="icon">🛍️</div>
+                        <p>Votre panier est vide</p>
+                    </div>
+                `;
+            } else {
+                itemsContainer.innerHTML = cart.map(item => `
+                    <div class="ds-cart-item">
+                        <div class="ds-cart-item-img">${item.icon}</div>
+                        <div class="ds-cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>${item.price.toLocaleString()} G</p>
+                        </div>
+                        <div class="ds-cart-item-qty">
+                            <button onclick="changeQty(${item.id}, -1)">−</button>
+                            <span>${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)">+</button>
+                        </div>
+                        <button class="ds-remove-item" onclick="removeFromCart(${item.id})">🗑️</button>
+                    </div>
+                `).join('');
+            }
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            document.getElementById('cart-total').textContent = total.toLocaleString() + ' G';
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('Votre panier est vide !');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            alert(`Merci pour votre commande chez Danny STORE !\n\nTotal: ${total.toLocaleString()} G\n\nNous vous contacterons bientôt pour la livraison.`);
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        renderProducts();
+    </script>
+
+</body>
+</html>
