@@ -10,7 +10,6 @@
         :root { --gold: #D4AF37; --gold-light: #f0e68c; --dark: #1a1a2e; --dark-light: #16213e; --rose: #E8B4B8; --light: #f8f9fa; }
         body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: var(--dark); line-height: 1.6; }
         
-        /* Header */
         .ds-header { background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%); color: white; padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .ds-header-top { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; gap: 1rem; }
         .ds-logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; background: linear-gradient(45deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -20,7 +19,6 @@
         .ds-cart-btn { background: var(--gold); color: var(--dark); border: none; padding: 0.6rem 1.2rem; border-radius: 25px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: transform 0.2s; font-family: inherit; font-size: 0.9rem; }
         .ds-cart-btn:hover { transform: scale(1.05); }
         
-        /* Hero */
         .ds-hero { background: linear-gradient(135deg, var(--dark) 0%, #0f3460 50%, #533483 100%); color: white; padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
         .ds-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
@@ -29,12 +27,10 @@
         .ds-hero-cta { background: var(--gold); color: var(--dark); padding: 1rem 2.5rem; border-radius: 30px; font-weight: 700; font-size: 1.1rem; border: none; cursor: pointer; position: relative; z-index: 1; transition: all 0.3s; font-family: inherit; }
         .ds-hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,175,55,0.4); }
         
-        /* Categories */
         .ds-categories { display: flex; justify-content: center; gap: 1rem; padding: 2rem; flex-wrap: wrap; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 70px; z-index: 90; }
         .ds-cat-btn { padding: 0.8rem 2rem; border: 2px solid #e0e0e0; background: white; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-family: inherit; font-size: 0.9rem; }
         .ds-cat-btn:hover, .ds-cat-btn.active { border-color: var(--gold); background: #fffdf5; color: var(--gold); }
         
-        /* Products */
         .ds-products { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; }
         .ds-section-title { text-align: center; font-size: 2.2rem; color: var(--dark); margin-bottom: 3rem; position: relative; font-weight: 800; }
         .ds-section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin: 1rem auto 0; border-radius: 2px; }
@@ -53,7 +49,6 @@
         .ds-add-btn { width: 100%; padding: 0.9rem; background: var(--dark); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: inherit; font-size: 0.95rem; }
         .ds-add-btn:hover { background: var(--gold); color: var(--dark); }
         
-        /* Cart Sidebar */
         .ds-cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: white; box-shadow: -5px 0 30px rgba(0,0,0,0.2); z-index: 200; transition: right 0.4s ease; display: flex; flex-direction: column; }
         .ds-cart-sidebar.open { right: 0; }
         .ds-cart-header { background: var(--dark); color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
@@ -76,16 +71,13 @@
         .ds-empty-cart { text-align: center; padding: 3rem 1rem; color: #999; }
         .ds-empty-cart .icon { font-size: 3rem; margin-bottom: 1rem; }
         
-        /* Overlay */
         .ds-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .ds-overlay.active { opacity: 1; pointer-events: all; }
         
-        /* Toast */
         .ds-toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--dark); color: white; padding: 1rem 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 300; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); display: flex; align-items: center; gap: 0.5rem; font-weight: 600; }
         .ds-toast.show { transform: translateX(-50%) translateY(0); }
         .ds-toast .check { color: #2ecc71; font-size: 1.2rem; }
         
-        /* Footer */
         .ds-footer { background: var(--dark); color: white; padding: 3rem 2rem 2rem; margin-top: 4rem; }
         .ds-footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
         .ds-footer h4 { color: var(--gold); margin-bottom: 1rem; font-size: 1.1rem; }
@@ -94,7 +86,6 @@
         .ds-footer p { color: #aaa; line-height: 1.6; font-size: 0.95rem; }
         .ds-footer-bottom { text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #333; color: #666; font-size: 0.9rem; }
         
-        /* Responsive */
         @media (max-width: 768px) {
             .ds-hero h1 { font-size: 2rem; }
             .ds-hero p { font-size: 1rem; }
@@ -203,19 +194,19 @@
     <script>
         const products = [
             { id: 1, name: "Snapback NY Classique", category: "snapback", price: 2500, oldPrice: null, badge: "POPULAIRE", icon: "🧢", image: "https://i.postimg.cc/bJ8bmcPr/retro-noir-4.jpg", desc: "Snapback rétro noir avec broderie premium, ajustable." },
-            { id: 2, name: "Snapback Los Angeles", category: "snapback", price: 2800, oldPrice: null, badge: "NEW", icon: "🧢", image: null, desc: "Style urbain tendance, broderie LA haute qualité." },
+            { id: 2, name: "Snapback Los Angeles", category: "snapback", price: 2800, oldPrice: null, badge: "NEW", icon: "🧢", image: "https://i.postimg.cc/5tG9t874/gabana.jpg", desc: "Style urbain tendance, broderie LA haute qualité." },
             { id: 3, name: "Snapback Broderie Or", category: "snapback", price: 3500, oldPrice: null, badge: "LUXE", icon: "🧢", image: null, desc: "Broderie dorée sur fond noir, finition premium." },
-            { id: 4, name: "Snapback Edition Limitée", category: "snapback", price: 4200, oldPrice: null, badge: "EXCLUSIF", icon: "🧢", image: null, desc: "Modèle exclusif, quantité très limitée." },
+            { id: 4, name: "Snapback Edition Limitée", category: "snapback", price: 4200, oldPrice: null, badge: "EXCLUSIF", icon: "🧢", image: "https://i.postimg.cc/2yrsj6Dz/new-kepi.jpg", desc: "Modèle exclusif, quantité très limitée." },
             { id: 5, name: "Collier Chaîne Or 18K", category: "bijoux", price: 8500, oldPrice: null, badge: "BEST", icon: "💎", image: null, desc: "Chaîne élégante en plaqué or 18 carats." },
             { id: 6, name: "Bracelet Gourmette", category: "bijoux", price: 3200, oldPrice: null, badge: "", icon: "💎", image: null, desc: "Bracelet classique gourmette, ajustable." },
             { id: 7, name: "Boucles d'Oreilles Créoles", category: "bijoux", price: 1800, oldPrice: null, badge: "SALE", icon: "💎", image: null, desc: "Créoles dorées, parfaites pour toutes occasions." },
             { id: 8, name: "Bague Zirconium", category: "bijoux", price: 4500, oldPrice: null, badge: "NEW", icon: "💎", image: null, desc: "Bague scintillante avec pierre zirconium." },
-            { id: 9, name: "Robe Élégante Soirée", category: "vetements", price: 6500, oldPrice: null, badge: "TENDANCE", icon: "👗", image: null, desc: "Robe fluide et élégante pour vos soirées." },
+            { id: 9, name: "Robe Élégante Soirée", category: "vetements", price: 6500, oldPrice: null, badge: "TENDANCE", icon: "👗", image: "https://i.postimg.cc/PfS3vKb6/robe-femme-new.jpg", desc: "Robe fluide et élégante pour vos soirées." },
             { id: 10, name: "Top Crop Fashion", category: "vetements", price: 2200, oldPrice: null, badge: "", icon: "👚", image: null, desc: "Top crop tendance, confortable et stylé." },
             { id: 11, name: "Jupe Plissée", category: "vetements", price: 3500, oldPrice: null, badge: "SALE", icon: "👗", image: null, desc: "Jupe plissée légère, idéale pour l'été." },
             { id: 12, name: "Ensemble Sport Chic", category: "vetements", price: 5500, oldPrice: null, badge: "NEW", icon: "👚", image: null, desc: "Ensemble coordonné sport et élégance." },
             { id: 13, name: "Veste Denim Oversize", category: "vetements", price: 4800, oldPrice: null, badge: "", icon: "🧥", image: null, desc: "Veste denim oversize, coupe moderne." },
-            { id: 14, name: "Pantalon Palazzo", category: "vetements", price: 3800, oldPrice: null, badge: "", icon: "👖", image: null, desc: "Pantalon fluide et confortable, coupe palazzo." },
+            { id: 14, name: "Pantalon Palazzo", category: "vetements", price: 3800, oldPrice: null, badge: "", icon: "👖", image: "https://i.postimg.cc/qMY1jR5B/robe-bleu.jpg", desc: "Pantalon fluide et confortable, coupe palazzo." },
             { id: 15, name: "Snapback Camo Edition", category: "snapback", price: 3000, oldPrice: null, badge: "", icon: "🧢", image: null, desc: "Snapback camouflage, style streetwear." },
             { id: 16, name: "Montre Bracelet Cuir", category: "bijoux", price: 5500, oldPrice: null, badge: "", icon: "⌚", image: null, desc: "Montre élégante avec bracelet en cuir véritable." }
         ];
