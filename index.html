@@ -66,7 +66,7 @@
         .ds-remove-item { color: #e74c3c; background: none; border: none; cursor: pointer; font-size: 1.2rem; font-family: inherit; padding: 0.2rem; }
         .ds-cart-footer { padding: 1.5rem; border-top: 2px solid #eee; background: #fafafa; }
         .ds-cart-total { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; }
-        .ds-checkout-btn { width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s; font-family: inherit; }
+        .ds-checkout-btn { width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s; font-family: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; }
         .ds-checkout-btn:hover { transform: scale(1.02); }
         .ds-empty-cart { text-align: center; padding: 3rem 1rem; color: #999; }
         .ds-empty-cart .icon { font-size: 3rem; margin-bottom: 1rem; }
@@ -157,7 +157,7 @@
             <div>
                 <h4>Contact</h4>
                 <p>📧 contact@dannystore.com</p>
-                <p>📱 +509 0000-0000</p>
+                <p>📱 +509 4169-2621</p>
                 <p>📍 Haïti</p>
             </div>
         </div>
@@ -179,10 +179,10 @@
         </div>
         <div class="ds-cart-footer">
             <div class="ds-cart-total">
-                <span>Total</span>
-                <span id="cart-total">0 G</span>
+                <span>Total articles</span>
+                <span id="cart-total">0</span>
             </div>
-            <button class="ds-checkout-btn" onclick="checkout()">Commander maintenant</button>
+            <a href="#" class="ds-checkout-btn" id="whatsapp-link" target="_blank" onclick="return prepareWhatsApp()">📱 Commander sur WhatsApp</a>
         </div>
     </div>
 
@@ -192,6 +192,8 @@
     </div>
 
     <script>
+        const WHATSAPP_NUMBER = "50941692621";
+        
         const products = [
             { id: 1, name: "Snapback NY Classique", category: "snapback", price: 2500, oldPrice: null, badge: "POPULAIRE", icon: "🧢", image: "https://i.postimg.cc/bJ8bmcPr/retro-noir-4.jpg", desc: "Snapback rétro noir avec broderie premium, ajustable." },
             { id: 2, name: "Snapback Los Angeles", category: "snapback", price: 2800, oldPrice: null, badge: "NEW", icon: "🧢", image: "https://i.postimg.cc/5tG9t874/gabana.jpg", desc: "Style urbain tendance, broderie LA haute qualité." },
@@ -280,6 +282,8 @@
         function updateCart() {
             const count = cart.reduce((sum, item) => sum + item.qty, 0);
             document.getElementById('cart-count').textContent = count;
+            document.getElementById('cart-total').textContent = count + " article" + (count > 1 ? "s" : "");
+            
             const itemsContainer = document.getElementById('cart-items');
             if (cart.length === 0) {
                 itemsContainer.innerHTML = `
@@ -320,15 +324,28 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        function checkout() {
+        function prepareWhatsApp() {
             if (cart.length === 0) {
                 showToast('Votre panier est vide !');
-                return;
+                return false;
             }
-            alert(`Merci pour votre commande chez Danny STORE !\n\nNous vous contacterons bientôt pour confirmer les détails et les prix.`);
+            
+            let message = "🛒 *Commande Danny STORE*%0A%0A";
+            message += "Bonjour, je souhaite commander :%0A%0A";
+            
+            cart.forEach(item => {
+                message += `• ${item.name} x${item.qty}%0A`;
+            });
+            
+            message += `%0AMerci de me confirmer la disponibilité et le prix.`;
+            
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            document.getElementById('whatsapp-link').href = whatsappUrl;
+            
             cart = [];
             updateCart();
             toggleCart();
+            return true;
         }
 
         renderProducts();
